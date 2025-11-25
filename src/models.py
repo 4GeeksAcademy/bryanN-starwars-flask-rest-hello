@@ -96,3 +96,29 @@ class FavoriteVehicle(db.Model):
     user_id: Mapped[str] = mapped_column(ForeignKey('user.id'), primary_key=True)
     vehicle: Mapped[str] = mapped_column(ForeignKey('vehicle.id'), primary_key=True)
 
+class Starship(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(120), nullable=False)
+    passengers: Mapped[str] = mapped_column(String(120), nullable=False)
+    manufacturer: Mapped[str] = mapped_column(String(120), nullable=False)
+    model: Mapped[str] = mapped_column(String(120), nullable=False)
+    crew: Mapped[str] = mapped_column(String(120), nullable=False)
+    cost_in_credits: Mapped[str] = mapped_column(String(120), nullable=False)
+
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "passengers": self.passengers,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "crew": self.crew,
+            "cost_in_credits": self.cost_in_credits,
+        }
+
+class FavoriteStarship(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey('user.id'), primary_key=True)
+    starship: Mapped[str] = mapped_column(ForeignKey('starship.id'), primary_key=True)
+
